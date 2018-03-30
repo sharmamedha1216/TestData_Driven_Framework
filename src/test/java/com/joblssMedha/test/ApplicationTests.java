@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.IInvokedMethod;
@@ -38,9 +40,15 @@ public class ApplicationTests extends HomepageTestBase {
 
 	@Test (dataProvider = "get ExcelData") 
 	public void launchApplication(Map <String, String> testData) {
+		logger = Logger.getLogger(ApplicationTests.class);
+		PropertyConfigurator.configure("/Users/HiteshRatnani/eclipse-workspace/PracticeHome/log4j.properties");
+		logger.info("Madhu");
 		System.out.println(testData.get("UserID"));
+		logger.info("Madhu");
 		System.out.println(testData.keySet());
+		logger.info("Madhu");
 		System.out.println(testData.values());
+		logger.info("Madhu");
 	}
 
 	
