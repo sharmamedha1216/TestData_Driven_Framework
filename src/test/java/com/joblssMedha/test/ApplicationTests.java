@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +22,9 @@ import org.testng.annotations.Test;
 
 import com.jobless.utilities.ExcelUtility;
 import com.joblssMedha.basetest.HomepageTestBase;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class ApplicationTests extends HomepageTestBase {
 	
@@ -40,15 +45,26 @@ public class ApplicationTests extends HomepageTestBase {
 
 	@Test (dataProvider = "get ExcelData") 
 	public void launchApplication(Map <String, String> testData) {
+		ExtentReports report;
+		ExtentTest ex;
+		String testName= testData.get("testCaseName");
+		report = new ExtentReports("//Users//HiteshRatnani//eclipse-workspace//PracticeHome//reports//"+testName+".html");
+		ex = report.startTest(testName);
+		
 		logger = Logger.getLogger(ApplicationTests.class);
 		PropertyConfigurator.configure("/Users/HiteshRatnani/eclipse-workspace/PracticeHome/log4j.properties");
 		logger.info("Madhu");
+		ex.log(LogStatus.INFO, "details 1");
 		System.out.println(testData.get("UserID"));
 		logger.info("Madhu");
+		ex.log(LogStatus.PASS, "details 2");
 		System.out.println(testData.keySet());
 		logger.info("Madhu");
+		ex.log(LogStatus.FAIL, "details.3");
 		System.out.println(testData.values());
 		logger.info("Madhu");
+		ex.log(LogStatus.INFO, "details4");
+		report.endTest(ex);
 	}
 
 	
