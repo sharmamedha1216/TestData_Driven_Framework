@@ -12,6 +12,7 @@ import javax.net.ssl.SSLEngineResult.Status;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.IInvokedMethod;
@@ -47,7 +48,7 @@ public class ApplicationTests extends HomepageTestBase {
 	public void launchApplication(Map <String, String> testData) {
 		ExtentReports report;
 		ExtentTest ex;
-		String testName= testData.get("testCaseName");
+		String testName= testData.get("TestCaseName");
 		report = new ExtentReports("//Users//HiteshRatnani//eclipse-workspace//PracticeHome//reports//"+testName+".html");
 		ex = report.startTest(testName);
 		
@@ -65,7 +66,21 @@ public class ApplicationTests extends HomepageTestBase {
 		logger.info("Madhu");
 		ex.log(LogStatus.INFO, "details4");
 		report.endTest(ex);
+		report.flush();
+		report.close();
 	}
 
-	
+	@Test
+	public void loginGmailMedha() throws InterruptedException {
+		driver.get("http://www.gmail.com");
+		Thread.sleep(10000);
+		driver.findElement(By.xpath("//input[@id='identifierId']")).sendKeys("Sharmamedha1316");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[text()='Next']")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//input[@type='password']")).sendKeys("Charlie777#");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[text()='Next']")).click();
+		
+	}
 }
